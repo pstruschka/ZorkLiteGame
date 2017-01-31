@@ -27,7 +27,7 @@
                 <configuration>
                     <archive>
                         <manifest>
-                            <mainClass>io.muic.ooc.zork.Main</mainClass>
+                            <mainClass>io.muic.ooc.zork.ZorkRunner</mainClass>
                         </manifest>
                     </archive>
                 </configuration>
