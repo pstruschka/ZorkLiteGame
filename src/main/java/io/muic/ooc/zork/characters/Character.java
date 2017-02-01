@@ -3,9 +3,11 @@ package io.muic.ooc.zork.characters;
 import io.muic.ooc.zork.Exceptions.NameBoundException;
 import io.muic.ooc.zork.Map;
 
+import java.util.HashMap;
+
 public abstract class Character {
     private final String name;
-    private static java.util.Map<String, Character> characters;
+    private static java.util.Map<String, Character> characters = new HashMap<>();
 
     final int MAX_HEALTH;
     final int MIN_HEALTH = 0;
@@ -16,17 +18,17 @@ public abstract class Character {
     int coordX;
     int coordY;
 
-    private Character(String name) throws NameBoundException {
+    private Character(String name, int maxHP) throws NameBoundException {
         if (!characters.containsKey(name)) {
             this.name = name;
+            MAX_HEALTH = maxHP;
             characters.put(name, this);
         } else
             throw new NameBoundException("Character of name\"" + name + "\"already exists");
     }
 
     Character(String name, int maxHP, Map map, int x, int y) throws NameBoundException {
-        this(name);
-        MAX_HEALTH = maxHP;
+        this(name, maxHP);
         health = MAX_HEALTH;
         alive = true;
 
@@ -51,6 +53,10 @@ public abstract class Character {
 
     public boolean isAlive() {
         return alive;
+    }
+
+    public static Character getCharacter(String name){
+        return characters.getOrDefault(name, null);
     }
 
     @Override

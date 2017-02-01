@@ -2,11 +2,12 @@ package io.muic.ooc.zork.items;
 
 import io.muic.ooc.zork.Exceptions.NameBoundException;
 
+import java.util.HashMap;
 import java.util.Map;
 
 public abstract class Item {
     private final String name;
-    private static Map<String, Item> items;
+    private static Map<String, Item> items = new HashMap<>();
 
     Item(String name) throws NameBoundException {
         if (!items.containsKey(name)) {
