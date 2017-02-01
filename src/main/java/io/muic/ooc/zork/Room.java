@@ -1,5 +1,8 @@
 package io.muic.ooc.zork;
 
+import io.muic.ooc.zork.characters.Monster;
+import io.muic.ooc.zork.items.Item;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -22,7 +25,7 @@ public class Room {
     }
 
     public boolean roomHasItem(Item item) {
-        return true;
+        return items.contains(item);
     }
 
     public String getInfo() {
