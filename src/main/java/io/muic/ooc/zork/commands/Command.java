@@ -2,14 +2,15 @@ package io.muic.ooc.zork.commands;
 
 
 import io.muic.ooc.zork.characters.Character;
+import io.muic.ooc.zork.characters.Player;
 
 import java.util.Scanner;
 
 public abstract class Command {
-    Character character;
+    Player player;
 
-    public Command(Character character) {
-        this.character = character;
+    public Command(Player player) {
+        this.player = player;
     }
 
     public abstract void run(Scanner args);

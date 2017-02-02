@@ -1,7 +1,8 @@
 package io.muic.ooc.zork.characters;
 
 import io.muic.ooc.zork.Exceptions.NameBoundException;
-import io.muic.ooc.zork.Map;
+import io.muic.ooc.zork.map.Map;
+import io.muic.ooc.zork.map.Room;
 
 import java.util.Random;
 
@@ -9,8 +10,8 @@ public class Monster extends Character{
 
     private final int damage;
 
-    Monster(String name, int maxHP, Map map, int x, int y, int damage) throws NameBoundException {
-        super(name, maxHP, map, x, y);
+    Monster(String name, int maxHP, Map map, Room room, int damage) throws NameBoundException {
+        super(name, maxHP, map, room);
         this.damage = damage;
     }
 

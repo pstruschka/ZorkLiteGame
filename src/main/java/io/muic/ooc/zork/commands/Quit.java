@@ -1,12 +1,12 @@
 package io.muic.ooc.zork.commands;
 
-import io.muic.ooc.zork.characters.Character;
+import io.muic.ooc.zork.characters.Player;
 
 import java.util.Scanner;
 
 public class Quit extends Command {
-    public Quit(Character character) {
-        super(character);
+    public Quit(Player player) {
+        super(player);
     }
 
     @Override

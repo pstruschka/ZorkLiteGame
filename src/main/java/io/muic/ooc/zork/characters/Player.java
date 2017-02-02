@@ -1,8 +1,8 @@
 package io.muic.ooc.zork.characters;
 
 import io.muic.ooc.zork.Exceptions.NameBoundException;
-import io.muic.ooc.zork.Map;
-import io.muic.ooc.zork.Room;
+import io.muic.ooc.zork.map.Map;
+import io.muic.ooc.zork.map.Room;
 import io.muic.ooc.zork.items.Item;
 
 import java.util.ArrayList;
@@ -13,21 +13,31 @@ public class Player extends Character {
     private final int MAX_INVENTORY = 3;
     private List<Item> inventory;
 
-    public Player(Map map, int x, int y) throws NameBoundException {
-        super("Player", 50, map, x, y);
+    public Player(Map map, Room room) throws NameBoundException{
+        super("Player", 50, map, room);
         inventory = new ArrayList<>(MAX_INVENTORY);
         alive = true;
     }
 
-    boolean changeLevel(Map map, int x, int y) {
-        currentMap = map;
-        coordX = x;
-        coordY = y;
-        return true;
+    public boolean changeLevel(Map map, Room room) {
+        if (map.roomExists(room)) {
+            currentMap = map;
+            currentRoom = room;
+            return true;
+        }
+        else return false;
     }
 
-    public Room getCurrentRoom() {
-        return currentMap.getRoom(coordX, coordY);
+    public boolean move(Room room) {
+        if (currentMap.roomExists(room)) {
+            currentRoom = room;
+            return true;
+        }
+        else return false;
+    }
+
+    public Room getLocation() {
+        return currentRoom;
     }
 
     public List<Item> getInventory() {
