@@ -4,8 +4,8 @@ import java.util.*;
 
 public class MapGenerator {
 
-    private static final int MAP_WIDTH = 6;
-    private static final int MAP_HEIGHT = 6;
+    private static final int MAP_WIDTH = 3;
+    private static final int MAP_HEIGHT = 3;
     private static Set<Room> frontier = new HashSet<>();
     private static Set<Room> in = new HashSet<>();
     static Room rooms[][] = new Room[MAP_HEIGHT][MAP_WIDTH];
@@ -89,11 +89,6 @@ public class MapGenerator {
             mark(prevRoom, prevRoomCoords[0], prevRoomCoords[1]);
         }
         System.out.println("finished Gen");
-        for (Room row[]: rooms) {
-            for (Room col :row) {
-                System.out.println(col);
-            }
-        }
         Map map = new Map(in, MAP_WIDTH, MAP_HEIGHT);
         return map;
     }

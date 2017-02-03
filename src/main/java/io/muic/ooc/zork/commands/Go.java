@@ -1,5 +1,6 @@
 package io.muic.ooc.zork.commands;
 
+import io.muic.ooc.zork.Exceptions.BadSyntaxException;
 import io.muic.ooc.zork.characters.Player;
 import io.muic.ooc.zork.map.Direction;
 import io.muic.ooc.zork.map.Room;
@@ -12,16 +13,14 @@ public class Go extends Command {
     }
 
     @Override
-    public void run(Scanner args) {
+    public void run(Scanner args) throws BadSyntaxException{
         String BLOCKED = "A wall blocks your path";
         args.next();
         if (!args.hasNext()) {
-            System.out.printf("Invalid syntax: go [n,s,e,w] or go [north,south,east,west]");
-            return;
+            System.out.printf("Invalid syntax: go [n,s,e,w] or go [north,south,east,west]\n");
+            throw new BadSyntaxException();
         }
-        System.out.println("Pick a direction");
         String direction = args.next().toLowerCase();
-        System.out.println(direction);
         switch (direction) {
             case "north":
             case "n": {
@@ -30,9 +29,7 @@ public class Go extends Command {
                     System.out.println(BLOCKED);
                     return;
                 }
-                if (player.move(nextRoom))
-                    nextRoom.getInfo();
-                else System.out.println("error");
+                if (!player.move(nextRoom)) throw new BadSyntaxException();
                 break;
             }
             case "south":
@@ -42,9 +39,7 @@ public class Go extends Command {
                     System.out.println(BLOCKED);
                     return;
                 }
-                if (player.move(nextRoom))
-                    nextRoom.getInfo();
-                else System.out.println("error");
+                if (!player.move(nextRoom)) throw new BadSyntaxException();
                 break;
             }
             case "east":
@@ -54,9 +49,7 @@ public class Go extends Command {
                     System.out.println(BLOCKED);
                     return;
                 }
-                if (player.move(nextRoom))
-                    nextRoom.getInfo();
-                else System.out.println("error");
+                if (!player.move(nextRoom)) throw new BadSyntaxException();
                 break;
             }
             case "west":
@@ -66,13 +59,12 @@ public class Go extends Command {
                     System.out.println(BLOCKED);
                     return;
                 }
-                if (player.move(nextRoom))
-                    nextRoom.getInfo();
-                else System.out.println("error");
+                if (!player.move(nextRoom)) throw new BadSyntaxException();
                 break;
             }
             default:
-                System.out.println("WHERE?");
+                System.out.printf("Invalid syntax: go [n,s,e,w] or go [north,south,east,west]\n");
+                throw new BadSyntaxException();
         }
     }
 }

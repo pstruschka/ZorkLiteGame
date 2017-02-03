@@ -2,7 +2,6 @@ package io.muic.ooc.zork.map;
 
 import java.util.HashMap;
 import java.util.Iterator;
-import java.util.List;
 
 public class Map {
     private Room[][] map;
@@ -27,7 +26,16 @@ public class Map {
     public Room getRoom(int id) {
         return roomMap.get(id);
     }
+    public Iterator<Room> getRooms() {
+        return roomMap.values().iterator();
+    }
     public boolean roomExists(Room room) {
         return roomMap.containsValue(room);
+    }
+    public int[] getDimensions(){
+        return new int[]{map[0].length, map.length};
+    }
+    public int getSize() {
+        return roomMap.size();
     }
 }

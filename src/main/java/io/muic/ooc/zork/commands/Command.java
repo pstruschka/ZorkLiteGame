@@ -1,6 +1,7 @@
 package io.muic.ooc.zork.commands;
 
 
+import io.muic.ooc.zork.Exceptions.BadSyntaxException;
 import io.muic.ooc.zork.characters.Character;
 import io.muic.ooc.zork.characters.Player;
 
@@ -13,5 +14,5 @@ public abstract class Command {
         this.player = player;
     }
 
-    public abstract void run(Scanner args);
+    public abstract void run(Scanner args) throws BadSyntaxException;
 }

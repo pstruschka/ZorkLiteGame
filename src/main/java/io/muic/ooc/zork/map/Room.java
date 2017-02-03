@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Map;
 
 public class Room {
-    private final static int MAX_ITEMS = 3;
+    private final static int MAX_ITEMS = 10;
     public static int GlobalID = 0;
     private static List<Room> Rooms = new ArrayList<>();
     private final int ID;
@@ -34,6 +34,14 @@ public class Room {
             return false;
         }
     }
+    public boolean removeItem(Item item) {
+        items.remove(item);
+        return true;
+    }
+
+    public boolean hasItem(Item item) {
+        return items.contains(item);
+    }
 
     public boolean roomHasItem(Item item) {
         return items.contains(item);
@@ -44,14 +52,30 @@ public class Room {
         for (Map.Entry<Direction, Room> exit:exitMap.entrySet()) {
             System.out.printf("Direction: %s -> to %d\n", exit.getKey().toString(), exit.getValue().getID());
         }
-        /* TODO: print monster and items */
+        if (hasMonster())
+            System.out.println(getMonster());
+        else
+            System.out.println("No monster resides here.");
+        if (!items.isEmpty())
+            System.out.println(items);
+        else
+            System.out.println("No items here.");
     }
 
     public void setMonster(Monster monster) {
-        if (this.monster != null) {
-            this.monster = monster;
-        }
+        this.monster = monster;
     }
+
+    public Monster getMonster() {
+        if (monster == null) return null;
+        return monster;
+    }
+
+    public boolean hasMonster() {
+        if (monster==null) return false;
+        return true;
+    }
+
     public void setExit(Direction direction, Room exitingRoom) {
         exitMap.put(direction, exitingRoom);
     }

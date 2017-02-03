@@ -15,25 +15,17 @@ public abstract class Character {
     int health;
     boolean alive;
 
-    Map currentMap;
-    Room currentRoom;
+    float damageMultiplier = 1;
 
-    private Character(String name, int maxHP) throws NameBoundException {
+    Character(String name, int maxHP) throws NameBoundException {
+        name = name.toLowerCase();
         if (!characters.containsKey(name)) {
             this.name = name;
             MAX_HEALTH = maxHP;
+            health = MAX_HEALTH;
             characters.put(name, this);
         } else
             throw new NameBoundException("Character of name\"" + name + "\"already exists");
-    }
-
-    Character(String name, int maxHP, Map map, Room room) throws NameBoundException {
-        this(name, maxHP);
-        health = MAX_HEALTH;
-        alive = true;
-
-        currentMap = map;
-        currentRoom = room;
     }
 
     public boolean changeHealth(int deltaHealth) {
@@ -51,11 +43,25 @@ public abstract class Character {
     }
 
     public boolean isAlive() {
-        return alive;
+        if (health > 0) return true;
+        return false;
+    }
+
+    public int getHealth() {
+        return health;
+    }
+
+    protected String getName() {
+        return name;
     }
 
     public static Character getCharacter(String name){
         return characters.getOrDefault(name, null);
+    }
+
+    public static void deleteCharacter(String name) {
+        if (characters.containsKey(name))
+            characters.remove(name);
     }
 
     @Override
@@ -68,5 +74,10 @@ public abstract class Character {
         if (!(object instanceof Character)) return false;
         Character character = (Character) object;
         return character.name.equals(name);
+    }
+
+    @Override
+    public String toString() {
+        return name;
     }
 }

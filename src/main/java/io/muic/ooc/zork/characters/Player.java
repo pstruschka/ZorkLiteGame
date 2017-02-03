@@ -13,10 +13,17 @@ public class Player extends Character {
     private final int MAX_INVENTORY = 3;
     private List<Item> inventory;
 
+    private Map currentMap;
+    private Room currentRoom;
+    private int damageModifier;
+
     public Player(Map map, Room room) throws NameBoundException{
-        super("Player", 50, map, room);
+        super("Player", 100);
         inventory = new ArrayList<>(MAX_INVENTORY);
         alive = true;
+        damageModifier = 1;
+        currentMap = map;
+        currentRoom = room;
     }
 
     public boolean changeLevel(Map map, Room room) {
@@ -44,6 +51,10 @@ public class Player extends Character {
         return inventory;
     }
 
+    public int getDamageModifier() {
+        return damageModifier;
+    }
+
     public boolean addToInventory(Item item) {
         if (inventory.size() < MAX_INVENTORY) {
             inventory.add(item);
@@ -52,11 +63,15 @@ public class Player extends Character {
             return false;
     }
 
-    public boolean dropItem(Item item) {
+    public boolean removeFromInventory(Item item) {
         if (inventory.contains(item)) {
             inventory.remove(item);
             return true;
         } else
             return false;
+    }
+
+    public boolean hasItem(Item item) {
+        return inventory.contains(item);
     }
 }

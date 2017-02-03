@@ -1,6 +1,7 @@
 package io.muic.ooc.zork.items;
 
 import io.muic.ooc.zork.Exceptions.NameBoundException;
+import io.muic.ooc.zork.characters.Character;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -10,6 +11,7 @@ public abstract class Item {
     private static Map<String, Item> items = new HashMap<>();
 
     Item(String name) throws NameBoundException {
+        name = name.toLowerCase();
         if (!items.containsKey(name)) {
             this.name = name;
             items.put(name, this);
@@ -22,7 +24,15 @@ public abstract class Item {
     }
 
     public static Item getItem(String name) {
+        name = name.toLowerCase();
         return items.getOrDefault(name, null);
+    }
+
+    public static void deleteItem(String name) {
+        name = name.toLowerCase();
+        if (items.containsKey(name)) {
+            items.remove(name);
+        }
     }
 
     @Override
@@ -37,6 +47,11 @@ public abstract class Item {
         return item.name.equals(name);
     }
 
-    public abstract void use();
+    @Override
+    public String toString() {
+        return name;
+    }
+
+    public abstract void use(Character character);
 
 }
