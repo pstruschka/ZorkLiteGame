@@ -19,6 +19,7 @@ public class Monster extends Character{
     public int attack(Character character) {
         int thisDamage = DamageHandler.getRandomDamage(character, damage);
         System.out.printf("%s attacks for %d damage.\n", this.getName(), thisDamage);
+        System.out.printf("You have %d health left\n", character.getHealth());
         return thisDamage;
     }
 }

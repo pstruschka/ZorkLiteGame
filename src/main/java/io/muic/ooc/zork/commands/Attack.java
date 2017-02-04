@@ -45,7 +45,8 @@ public class Attack extends Command{
         Weapon weapon = null;
         if (item instanceof Weapon) weapon = (Weapon) item;
         else {
-            System.out.printf("%s is not a weapon\n", name);
+            System.out.printf("You don't have %s in your inventory\n", name);
+            System.out.printf("You have %s in your inventory\n", player.getInventory().toString());
         }
         weapon.use(player, monster);
     }

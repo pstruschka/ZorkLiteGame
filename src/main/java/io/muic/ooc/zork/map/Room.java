@@ -10,20 +10,29 @@ import java.util.Map;
 
 public class Room {
     private final static int MAX_ITEMS = 10;
-    public static int GlobalID = 0;
-    private static List<Room> Rooms = new ArrayList<>();
+    public static int globalID = 0;
     private final int ID;
     private final int COORD_X;
     private final int COORD_Y;
     private List<Item> items = new ArrayList<>();
     private Monster monster = null;
 
+    private boolean canDescend = false;
+    private io.muic.ooc.zork.map.Map nextMap = null;
+    private Room nextRoom = null;
+
     private Map<Direction, Room> exitMap = new HashMap<>();
 
     public Room(int x, int y) {
-        ID = GlobalID++;
+        ID = globalID++;
         COORD_X = x;
         COORD_Y = y;
+    }
+
+    public void makeDescendable(io.muic.ooc.zork.map.Map map, Room room) {
+        canDescend = true;
+        nextRoom = room;
+        nextMap = map;
     }
 
     public boolean addItem(Item item) {
@@ -37,6 +46,14 @@ public class Room {
     public boolean removeItem(Item item) {
         items.remove(item);
         return true;
+    }
+
+    public List<Item> getItems() {
+        return items;
+    }
+
+    public static void resetCounter() {
+        globalID = 0;
     }
 
     public boolean hasItem(Item item) {
@@ -74,6 +91,20 @@ public class Room {
     public boolean hasMonster() {
         if (monster==null) return false;
         return true;
+    }
+
+    public boolean canDescend(){
+        return canDescend;
+    }
+
+    public io.muic.ooc.zork.map.Map getNextMap() {
+        if (canDescend) return nextMap;
+        return null;
+    }
+
+    public Room getNextRoom() {
+        if (canDescend) return  nextRoom;
+        return null;
     }
 
     public void setExit(Direction direction, Room exitingRoom) {

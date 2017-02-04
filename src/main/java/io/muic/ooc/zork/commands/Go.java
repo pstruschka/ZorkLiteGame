@@ -20,11 +20,15 @@ public class Go extends Command {
             System.out.printf("Invalid syntax: go [n,s,e,w] or go [north,south,east,west]\n");
             throw new BadSyntaxException();
         }
+        if (player.getLocation().hasMonster()) {
+            System.out.printf("The %s blocks the exit.\n", player.getLocation().getMonster());
+        }
+        Room nextRoom = null;
         String direction = args.next().toLowerCase();
         switch (direction) {
             case "north":
             case "n": {
-                Room nextRoom = player.getLocation().getExit(Direction.NORTH);
+                nextRoom = player.getLocation().getExit(Direction.NORTH);
                 if (nextRoom == null) {
                     System.out.println(BLOCKED);
                     return;
@@ -34,7 +38,7 @@ public class Go extends Command {
             }
             case "south":
             case "s": {
-                Room nextRoom = player.getLocation().getExit(Direction.SOUTH);
+                nextRoom = player.getLocation().getExit(Direction.SOUTH);
                 if (nextRoom == null) {
                     System.out.println(BLOCKED);
                     return;
@@ -44,7 +48,7 @@ public class Go extends Command {
             }
             case "east":
             case "e": {
-                Room nextRoom = player.getLocation().getExit(Direction.EAST);
+                nextRoom = player.getLocation().getExit(Direction.EAST);
                 if (nextRoom == null) {
                     System.out.println(BLOCKED);
                     return;
@@ -54,7 +58,7 @@ public class Go extends Command {
             }
             case "west":
             case "w": {
-                Room nextRoom = player.getLocation().getExit(Direction.WEST);
+                nextRoom = player.getLocation().getExit(Direction.WEST);
                 if (nextRoom == null) {
                     System.out.println(BLOCKED);
                     return;
@@ -65,6 +69,9 @@ public class Go extends Command {
             default:
                 System.out.printf("Invalid syntax: go [n,s,e,w] or go [north,south,east,west]\n");
                 throw new BadSyntaxException();
+        }
+        if (nextRoom.canDescend()) {
+            System.out.println("You can Descend the maze from here.");
         }
     }
 }

@@ -96,6 +96,10 @@ public class MapGenerator {
     public static Map createMap() {
         Map map = generate();
         reset();
+        /*Iterator<Room> roomIterator =  map.getRooms();
+        while (roomIterator.hasNext()){
+            System.out.println(roomIterator.next());
+        }*/
         return map;
     }
 }

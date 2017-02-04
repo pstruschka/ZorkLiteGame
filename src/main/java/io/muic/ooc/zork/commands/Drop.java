@@ -21,7 +21,8 @@ public class Drop extends Command {
         String name = args.next().toLowerCase();
         Item item = Item.getItem(name);
         if (item == null || !player.hasItem(item)) {
-            System.out.println("Not a valid item or item not in inventory");
+            System.out.printf("You don't have %s in your inventory\n", name);
+            System.out.printf("You have %s in your inventory\n", player.getInventory().toString());
             throw new BadSyntaxException();
         }
         player.removeFromInventory(item);

@@ -21,6 +21,11 @@ public class Use extends Command{
         }
         String name = args.next().toLowerCase();
         Item item = Item.getItem(name);
+        if (!player.hasItem(item)) {
+            System.out.printf("You don't have %s in your inventory\n", name);
+            System.out.printf("You have %s in your inventory\n", player.getInventory().toString());
+            throw new BadSyntaxException();
+        }
         Consumable consumable = null;
         if (item instanceof Consumable) consumable = (Consumable) item;
         else {

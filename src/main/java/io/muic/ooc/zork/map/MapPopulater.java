@@ -7,7 +7,6 @@ import java.util.*;
 
 public class MapPopulater {
     public static boolean populate(Map map, List<Item> items, List<Monster> monsters) {
-        Iterator<Room> rooms = map.getRooms();
         Random rand = new Random();
         int mapSize = map.getSize();
         int itemSize = items.size();
@@ -15,8 +14,7 @@ public class MapPopulater {
         int itemInc = mapSize/itemSize;
         int monsterInc = mapSize/monsterSize;
         int index;
-        HashMap<Integer, Item> itemMap = new HashMap<>();
-        HashMap<Integer, Monster> monsterMap = new HashMap<>();
+
         Iterator<Item> itemIterator = items.iterator();
         Iterator<Monster> monsterIterator = monsters.iterator();
         index = 0;

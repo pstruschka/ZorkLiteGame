@@ -21,11 +21,14 @@ public class Take extends Command{
         String name = args.next().toLowerCase();
         Item item = Item.getItem(name);
         if (item == null || !player.getLocation().hasItem(item)) {
-            System.out.println("Not a valid item or item not in room");
+            System.out.printf("There is no %s in this room\n", name);
+            System.out.printf("This room has %s\n", player.getLocation().getItems().toString());
             throw new BadSyntaxException();
         }
-        player.addToInventory(item);
-        player.getLocation().removeItem(item);
+        if(player.addToInventory(item))
+            player.getLocation().removeItem(item);
+        else
+            System.out.println("Your inventory is full");
 
     }
 }

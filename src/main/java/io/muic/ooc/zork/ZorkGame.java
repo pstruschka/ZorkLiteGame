@@ -23,14 +23,35 @@ public class ZorkGame {
     public void start() {
         Player player = null;
 
-        Map map = createMap();
+        Map level1 = createMap();
         List<Item> itemList = ItemFactory.generateItemsLevel1();
         List<Monster> monsterList = MonsterFactory.generateMonstersLevel1();
-        MapPopulater.populate(map, itemList, monsterList);
-        Room start = map.getRoom(0);
+        MapPopulater.populate(level1, itemList, monsterList);
+        Room.resetCounter();
+        System.out.println("CreatedMap1");
+
+        Map level2 = createMap();
+        itemList = ItemFactory.generateItemsLevel2();
+        monsterList = MonsterFactory.generateMonstersLevel2();
+        MapPopulater.populate(level2, itemList, monsterList);
+        Room.resetCounter();
+        System.out.println("CreatedMap2");
+
+        Map level3 = createMap();
+        itemList = ItemFactory.generateItemsLevel3();
+        monsterList = MonsterFactory.generateMonstersLevel3();
+        MapPopulater.populate(level3, itemList, monsterList);
+        System.out.println("CreatedMap3");
+
+        level1.getRoom(level1.getSize()-1).makeDescendable(level2, level2.getRoom(0));
+        level2.getRoom(level2.getSize()-1).makeDescendable(level3, level3.getRoom(0));
+        level3.getRoom(level3.getSize()-1).makeDescendable(null, null);
+
+        Room start = level1.getRoom(0);
         try {
-            player = new Player(map, start);
+            player = new Player(level1, start);
             player.addToInventory(new Weapon("WoodenAxe", 5));
+            System.out.println("You have a woodenaxe");
         } catch (NameBoundException e) {
             e.printStackTrace();
         }
@@ -47,6 +68,7 @@ public class ZorkGame {
         actions.put("attack", new Attack(player));
         actions.put("info", new Info(player));
         actions.put("use", new Use(player));
+        actions.put("descend", new Descend(player));
 
         boolean quit = false;
         Scanner in = new Scanner(System.in);
