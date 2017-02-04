@@ -88,7 +88,7 @@ public class MapGenerator {
             prevRoom.setExit(direction(prevRoomCoords[0], prevRoomCoords[1], nextRoomCoords[0], nextRoomCoords[1]), nextRoom);
             mark(prevRoom, prevRoomCoords[0], prevRoomCoords[1]);
         }
-        System.out.println("finished Gen");
+        /*System.out.println("finished Gen");*/
         Map map = new Map(in, MAP_WIDTH, MAP_HEIGHT);
         return map;
     }

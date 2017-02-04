@@ -18,7 +18,11 @@ public class Player extends Character {
     private int damageModifier;
 
     public Player(Map map, Room room) throws NameBoundException{
-        super("Player", 100);
+        this("Player", map, room);
+    }
+
+    public Player(String name, Map map, Room room) throws NameBoundException{
+        super(name, 150);
         inventory = new ArrayList<>(MAX_INVENTORY);
         alive = true;
         damageModifier = 1;

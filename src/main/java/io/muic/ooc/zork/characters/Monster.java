@@ -11,7 +11,7 @@ public class Monster extends Character{
 
     private final int damage;
 
-    Monster(String name, int maxHP, int damage) throws NameBoundException {
+    public Monster(String name, int maxHP, int damage) throws NameBoundException {
         super(name, maxHP);
         this.damage = damage;
     }

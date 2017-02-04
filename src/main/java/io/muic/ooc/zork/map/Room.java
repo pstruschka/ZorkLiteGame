@@ -60,10 +60,6 @@ public class Room {
         return items.contains(item);
     }
 
-    public boolean roomHasItem(Item item) {
-        return items.contains(item);
-    }
-
     public void getInfo() {
         System.out.printf("Room ID: %d\n", ID);
         for (Map.Entry<Direction, Room> exit:exitMap.entrySet()) {
